@@ -1,0 +1,74 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const { CosmosClient } = require('@azure/cosmos');
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Middleware para procesar datos del formulario
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Middleware para servir archivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Configuración de la conexión a Cosmos DB (reemplaza los valores con tus credenciales)
+const endpoint = process.env.COSMOSDB_ENDPOINT;
+const key = process.env.COSMOSDB_KEY;
+
+const client = new CosmosClient({ endpoint, key });
+
+// Nombre de la base de datos y colección
+const dbName = 'dbpr';
+const containerName = 'Usuarios';
+
+// Función para conectar a la base de datos
+async function connectToDb() {
+  try {
+    // Verificar que la base de datos y contenedor existen
+    const { database } = await client.databases.createIfNotExists({ id: dbName });
+    const { container } = await database.containers.createIfNotExists({ id: containerName });
+    console.log('Conectado a Cosmos DB');
+  } catch (error) {
+    console.error('Error conectando a Cosmos DB:', error);
+  }
+}
+
+// Conecta a la base de datos cuando inicie el servidor
+connectToDb();
+
+// Ruta para servir el formulario HTML
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Ruta para manejar el envío del formulario
+app.post('/submit', async (req, res) => {
+  const { nombre, email } = req.body;
+
+  // Validación básica
+  if (!nombre || !email) {
+    return res.status(400).send('Nombre y email son requeridos.');
+  }
+
+  try {
+    // Selecciona la base de datos y la colección
+    const database = client.database(dbName);
+    const container = database.container(containerName);
+
+    // Inserta los datos del formulario en la base de datos
+    const { resource: result } = await container.items.create({ nombre, email });
+
+    // Confirmación de éxito en la consola y respuesta al usuario
+    console.log(`Datos insertados con el id: ${result.id}`);
+    res.send(`¡Gracias, ${nombre}! Tus datos han sido almacenados.`);
+  } catch (error) {
+    console.error('Error insertando datos en Cosmos DB:', error);
+    res.status(500).send('Hubo un error guardando tus datos. Intenta nuevamente.');
+  }
+});
+
+// Iniciar el servidor
+app.listen(port, () => {
+  console.log(`Servidor corriendo en http://localhost:${port}`);
+});
