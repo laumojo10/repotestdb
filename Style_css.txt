@@ -114,15 +114,43 @@ body {
   place-items: center;
   margin: 0 1rem;
 }
+
+/* Navigation styles */
+nav {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Content styles */
 .content {
   display: flex;
   flex-direction: column;
-  align-items: left;
-  justify-content: left;
-}
-
-p {
-  font-size: 1.25rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Title h1 style */
@@ -136,66 +164,66 @@ p {
   margin: 2rem 0 0;
 }
 
-/* Very light scaling for our illustration */
-.illo-container {
-  display: flex;
-  justify-content: flex-end;
-}
-.illustration {
-  max-width: 100%;
-  max-height: 150px;
-  margin-top: 1rem;
-}
-
-/* Styles for our custom color form and its results */
-.color-info {
-  margin-left: 5px;
-}
-.color-search {
-  margin-top: 3rem;
-}
-.color-form {
-  width: 90%;
-  max-width: 500px;
-  margin-left: 5px;
-}
-.color-form a:not(.btn--remix) {
-  font-weight: bold;
-  color: var(--color-text-main);
-  margin-top: 8px;
-}
-.color-form button {
-  margin-top: 8px;
-}
-.color-form button:hover {
-  cursor: pointer;
-  box-shadow: -8px 4px 20px #9BE7D8;
-}
+/* Form styles */
 form {
-  margin: 0.75rem 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
 }
-button,
-input {
-  font-family: inherit;
-  font-size: 100%;
-  background: #FFFFFF;
-  border: 1px solid #000000;
-  box-sizing: border-box;
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
-}
-label {
-  color: #000000;
+
+form label {
+  margin-bottom: 5px;
   font-weight: bold;
 }
 
-/* Instructions */
-.instructions {
-  margin: 1rem auto 0;
+form input, form select, form button {
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
-.instructions p {
-  font-size: 1rem;
+
+form button {
+  background-color: #5cb85c;
+  color: #fff;
+  border: none;
+  cursor: pointer;
 }
-h2 {
-  color: #2800FF;
+
+form button:hover {
+  background-color: #4cae4c;
+}
+
+/* Tabs for forms */
+.tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.tabs button:hover {
+  background-color: #ddd;
+}
+
+.tabs button.active {
+  background-color: #5cb85c;
+  color: #fff;
+}
+
+/* Form section visibility */
+.form-section {
+  display: none;
+}
+
+.form-section.active {
+  display: block;
 }
