@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registro o Login</title>
+
+  <!-- El archivo de estilo CSS -->
+  <link rel="stylesheet" href="/style.css" />
+
+  <!-- El archivo JavaScript -->
+  <script src="/script.js" defer></script>
+</head>
+
+<body>
+  <div class="wrapper">
+    <nav>
+      <ul>
+        <li><a href="#login">Login</a></li>
+        <li><a href="#forgot-password">Forgot Password</a></li>
+        <li><a href="#sign-up">Sign Up</a></li>
+      </ul>
+    </nav>
+    
+    <div class="content" id="login">
+      <h1>Login</h1>
+      <form action="/login" method="POST">
+        <label for="login-email">Email:</label>
+        <input type="email" id="login-email" name="email" required><br><br>
+        
+        <label for="login-password">Contraseña:</label>
+        <input type="password" id="login-password" name="password" required><br><br>
+        
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+    <div class="content" id="forgot-password">
+      <h1>Forgot Password</h1>
+      <form action="/forgot-password" method="POST">
+        <label for="fp-email">Email:</label>
+        <input type="email" id="fp-email" name="email" required><br><br>
+        <button type="submit">Enviar enlace para restablecer contraseña</button>
+      </form>
+    </div>
+    
+    <div class="content" id="sign-up">
+      <h1>Sign Up</h1>
+      <div class="tabs">
+        <button onclick="showForm('candidatos')">Candidatos</button>
+        <button onclick="showForm('empresas')">Empresas</button>
+      </div>
+
+      <!-- Formulario de registro para Candidatos -->
+      <div id="candidatos-form" class="form-section" style="display:none;">
+        <h2>Registro de Candidatos</h2>
+        <form action="/register-candidatos" method="POST">
+          <label for="candidato-nombre">Nombre:</label>
+          <input type="text" id="candidato-nombre" name="nombre" required><br><br>
+          
+          <label for="candidato-id"># ID:</label>
+          <input type="text" id="candidato-id" name="id" required><br><br>
+          
+          <label for="candidato-pdf">PDF ID:</label>
+          <input type="text" id="candidato-pdf" name="pdf_id"><br><br>
+          
+          <label for="candidato-password">Contraseña:</label>
+          <input type="password" id="candidato-password" name="password" required><br><br>
+          
+          <label for="candidato-direccion">Dirección:</label>
+          <input type="text" id="candidato-direccion" name="direccion"><br><br>
+          
+          <label for="candidato-ciudad">Ciudad:</label>
+          <input type="text" id="candidato-ciudad" name="ciudad"><br><br>
+          
+          <label for="candidato-pais">Pais:</label>
+          <input type="text" id="candidato-pais" name="pais"><br><br>
+          
+          <label for="candidato-estado">Estado/Provincia:</label>
+          <input type="text" id="candidato-estado" name="estado_prov"><br><br>
+          
+          <label for="candidato-cel">Celular:</label>
+          <input type="text" id="candidato-cel" name="celular"><br><br>
+          
+          <label for="candidato-fecha-nac">Fecha de Nacimiento:</label>
+          <input type="date" id="candidato-fecha-nac" name="fecha_nac"><br><br>
+          
+          <label for="candidato-sexo">Sexo:</label>
+          <select id="candidato-sexo" name="sexo">
+            <option value="masculino">Masculino</option>
+            <option value="femenino">Femenino</option>
+            <option value="otro">Otro</option>
+          </select><br><br>
+          
+          <label for="candidato-foto1">Foto 1:</label>
+          <input type="file" id="candidato-foto1" name="foto1"><br><br>
+          
+          <label for="candidato-foto2">Foto 2:</label>
+          <input type="file" id="candidato-foto2" name="foto2"><br><br>
+          
+          <label for="candidato-est-civil">Estado Civil:</label>
+          <input type="text" id="candidato-est-civil" name="estado_civil"><br><br>
+          
+          <label for="candidato-email">Email:</label>
+          <input type="email" id="candidato-email" name="email" required><br><br>
+          
+          <label for="candidato-hijos">Hijos:</label>
+          <input type="number" id="candidato-hijos" name="hijos"><br><br>
+          
+          <button type="submit">Registrar Candidato</button>
+        </form>
+      </div>
+
+      <!-- Formulario de registro para Empresas -->
+      <div id="empresas-form" class="form-section" style="display:none;">
+        <h2>Registro de Empresas</h2>
+        <form action="/register-empresas" method="POST">
+          <label for="empresa-nombre">Nombre:</label>
+          <input type="text" id="empresa-nombre" name="nombre" required><br><br>
+          
+          <label for="empresa-id"># ID:</label>
+          <input type="text" id="empresa-id" name="id" required><br><br>
+          
+          <label for="empresa-rut">PDF RUT:</label>
+          <input type="text" id="empresa-rut" name="pdf_rut"><br><br>
+          
+          <label for="empresa-password">Contraseña:</label>
+          <input type="password" id="empresa-password" name="password" required><br><br>
+          
+          <label for="empresa-direccion">Dirección:</label>
+          <input type="text" id="empresa-direccion" name="direccion"><br><br>
+          
+          <label for="empresa-cel">Celular:</label>
+          <input type="text" id="empresa-cel" name="celular"><br><br>
+          
+          <label for="empresa-pais">Pais:</label>
+          <input type="text" id="empresa-pais" name="pais"><br><br>
+          
+          <label for="empresa-estado">Estado/Provincia:</label>
+          <input type="text" id="empresa-estado" name="estado_prov"><br><br>
+          
+          <label for="empresa-fecha-creacion">Fecha de Creación:</label>
+          <input type="date" id="empresa-fecha-creacion" name="fecha_creacion"><br><br>
+          
+          <label for="empresa-tipo">Tipo de Empresa:</label>
+          <input type="text" id="empresa-tipo" name="tipo_empresa"><br><br>
+          
+          <label for="empresa-foto-logo">Foto Logo (Pref.):</label>
+          <input type="file" id="empresa-foto-logo" name="foto_logo"><br><br>
+          
+          <label for="empresa-email">Email:</label>
+          <input type="email" id="empresa-email" name="email" required><br><br>
+          
+          <label for="empresa-tipo-industria">Tipo de Industria:</label>
+          <input type="text" id="empresa-tipo-industria" name="tipo_industria"><br><br>
+          
+          <button type="submit">Registrar Empresa</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showForm(formType) {
+      document.getElementById('candidatos-form').style.display = formType === 'candidatos' ? 'block' : 'none';
+      document.getElementById('empresas-form').style.display = formType === 'empresas' ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>
